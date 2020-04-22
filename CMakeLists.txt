@@ -1,4 +1,13 @@
+cmake_minimum_required(VERSION 3.5)
 project(move-transition)
+
+include(external/FindLibobs.cmake)
+include(ObsHelpers)
+find_package(LibObs REQUIRED)
+
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_PREFIX_PATH "${QTDIR}")
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 set(move-transition_HEADERS
 	move-transition.h
@@ -7,6 +16,10 @@ set(move-transition_SOURCES
 	move-transition.c
 	move-transition-override-filter.c
 	easing.c)
+
+include_directories(
+        "${LIBOBS_INCLUDE_DIR}/../UI/obs-frontend-api"
+        "${LIBOBS_INCLUDE_DIR}/../plugins")
 
 if(WIN32)
 	list(APPEND move-transition_SOURCES
